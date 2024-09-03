@@ -8,6 +8,6 @@
 + clinical_ECG_translation: code to translate the clinical ECG data from Johanessen *et al.* 2014, 2016.
 
 ### Dependencies
-All simulations were run using MATLAB 2023b.
-OS specifications: Ubuntu 22.04.4 LTS; 64 bit
-Processor: Intel® Core™ i7-8700 CPU @ 3.20GHz × 12
++ All simulations were run using MATLAB 2023b.
++ OS specifications: Ubuntu 22.04.4 LTS; 64 bit
++ Processor: Intel® Core™ i7-8700 CPU @ 3.20GHz × 12
