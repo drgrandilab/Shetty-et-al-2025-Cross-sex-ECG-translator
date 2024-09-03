@@ -102,10 +102,10 @@ Y_simulated_output = zeros(16, 4);
 predicted_percentage_change = zeros(16, 4);
 for t = 1:16
     percent_change = [rel_qrs_male_mean(t)  rel_qtc_male_mean(t)   rel_tpeakend_male_mean(t)  rel_twaveamp_male_mean(t) ];
-    X_simulated_change = mean(X_train).*(1+percent_change/100);
+    X_simulated_feature = mean(X_train).*(1+percent_change/100);
     
     Y_baseline_mean = mean(Y_train);
-    x = log(X_simulated_change);
+    x = log(X_simulated_feature);
     xz = (x-mean(X_log))./std(X_log);
     yz = xz*Blasso;
     y = yz.*std(Y_log)+mean(Y_log);

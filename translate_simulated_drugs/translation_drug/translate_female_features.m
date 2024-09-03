@@ -10,37 +10,37 @@ failed_4x = [2 8 14 21 24 25 34  39 41  42  45  46 52  56  61  62 65 67 68 71  7
 
 addpath('../run_simulated_drug_pseudo_ecgs/ecg_features_drug/')
 
-% load('CV_all_4x_male.mat'); [CV_all_4x_male,~] = removerows(CV_all_4x_male,'ind', failed_4x);
-load('QRS_amp_4x_male.mat'); [QRS_amp_4x_male,~] = removerows(QRS_amp_4x_male,'ind', failed_4x);
-load('QRS_dur_4x_male.mat'); [QRS_dur_4x_male,~] = removerows(QRS_dur_4x_male,'ind', failed_4x);
-load('QT_int_4x_male.mat'); [QT_int_4x_male,~] = removerows(QT_int_4x_male,'ind', failed_4x);
-load('ST_avg_4x_male.mat'); [ST_avg_4x_male,~] = removerows(ST_avg_4x_male,'ind', failed_4x);
-load('T_peakend_dur_4x_male.mat'); [T_peakend_dur_4x_male,~] = removerows(T_peakend_dur_4x_male,'ind', failed_4x);
-load('T_wave_amp_4x_male.mat'); [T_wave_amp_4x_male,~] = removerows(T_wave_amp_4x_male,'ind', failed_4x);
-load('theta_T_4x_male.mat'); [theta_T_4x_male,~] = removerows(theta_T_4x_male,'ind', failed_4x);
-load('Twave_dur_4x_male.mat'); [Twave_dur_4x_male,~] = removerows(Twave_dur_4x_male,'ind', failed_4x);
+% load('CV_all_1x_male.mat'); [CV_all_1x_male,~] = removerows(CV_all_1x_male,'ind', failed_1x);
+load('QRS_amp_1x_male.mat'); [QRS_amp_1x_male,~] = removerows(QRS_amp_1x_male,'ind', failed_1x);
+load('QRS_dur_1x_male.mat'); [QRS_dur_1x_male,~] = removerows(QRS_dur_1x_male,'ind', failed_1x);
+load('QT_int_1x_male.mat'); [QT_int_1x_male,~] = removerows(QT_int_1x_male,'ind', failed_1x);
+load('ST_avg_1x_male.mat'); [ST_avg_1x_male,~] = removerows(ST_avg_1x_male,'ind', failed_1x);
+load('T_peakend_dur_1x_male.mat'); [T_peakend_dur_1x_male,~] = removerows(T_peakend_dur_1x_male,'ind', failed_1x);
+load('T_wave_amp_1x_male.mat'); [T_wave_amp_1x_male,~] = removerows(T_wave_amp_1x_male,'ind', failed_1x);
+load('theta_T_1x_male.mat'); [theta_T_1x_male,~] = removerows(theta_T_1x_male,'ind', failed_1x);
+load('Twave_dur_1x_male.mat'); [Twave_dur_1x_male,~] = removerows(Twave_dur_1x_male,'ind', failed_1x);
 
-% load('CV_all_4x_female.mat'); [CV_all_4x_female,~] = removerows(CV_all_4x_female,'ind', failed_4x);
-load('QRS_amp_4x_female.mat'); [QRS_amp_4x_female,~] = removerows(QRS_amp_4x_female,'ind', failed_4x);
-load('QRS_dur_4x_female.mat'); [QRS_dur_4x_female,~] = removerows(QRS_dur_4x_female,'ind', failed_4x);
-load('QT_int_4x_female.mat'); [QT_int_4x_female,~] = removerows(QT_int_4x_female,'ind', failed_4x);
-load('ST_avg_4x_female.mat'); [ST_avg_4x_female,~] = removerows(ST_avg_4x_female,'ind', failed_4x);
-load('T_peakend_dur_4x_female.mat'); [T_peakend_dur_4x_female,~] = removerows(T_peakend_dur_4x_female,'ind', failed_4x);
-load('T_wave_amp_4x_female.mat'); [T_wave_amp_4x_female,~] = removerows(T_wave_amp_4x_female,'ind', failed_4x);
-load('theta_T_4x_female.mat'); [theta_T_4x_female,~] = removerows(theta_T_4x_female,'ind', failed_4x);
-load('Twave_dur_4x_female.mat'); [Twave_dur_4x_female,~] = removerows(Twave_dur_4x_female,'ind', failed_4x);
+% load('CV_all_1x_female.mat'); [CV_all_1x_female,~] = removerows(CV_all_1x_female,'ind', failed_1x);
+load('QRS_amp_1x_female.mat'); [QRS_amp_1x_female,~] = removerows(QRS_amp_1x_female,'ind', failed_1x);
+load('QRS_dur_1x_female.mat'); [QRS_dur_1x_female,~] = removerows(QRS_dur_1x_female,'ind', failed_1x);
+load('QT_int_1x_female.mat'); [QT_int_1x_female,~] = removerows(QT_int_1x_female,'ind', failed_1x);
+load('ST_avg_1x_female.mat'); [ST_avg_1x_female,~] = removerows(ST_avg_1x_female,'ind', failed_1x);
+load('T_peakend_dur_1x_female.mat'); [T_peakend_dur_1x_female,~] = removerows(T_peakend_dur_1x_female,'ind', failed_1x);
+load('T_wave_amp_1x_female.mat'); [T_wave_amp_1x_female,~] = removerows(T_wave_amp_1x_female,'ind', failed_1x);
+load('theta_T_1x_female.mat'); [theta_T_1x_female,~] = removerows(theta_T_1x_female,'ind', failed_1x);
+load('Twave_dur_1x_female.mat'); [Twave_dur_1x_female,~] = removerows(Twave_dur_1x_female,'ind', failed_1x);
 
 
-% X_test = [CV_all_4x_male, QRS_amp_4x_male, QRS_dur_4x_male, QT_int_4x_male, abs(ST_avg_4x_male), T_peakend_dur_4x_male, T_wave_amp_4x_male, theta_T_4x_male, Twave_dur_4x_male];
-% Y_test= [CV_all_4x_female, QRS_amp_4x_female, QRS_dur_4x_female, QT_int_4x_female, abs(ST_avg_4x_female), T_peakend_dur_4x_female, T_wave_amp_4x_female, theta_T_4x_female, Twave_dur_4x_female];
+% X_test = [CV_all_1x_male, QRS_amp_1x_male, QRS_dur_1x_male, QT_int_1x_male, abs(ST_avg_1x_male), T_peakend_dur_1x_male, T_wave_amp_1x_male, theta_T_1x_male, Twave_dur_1x_male];
+% Y_test= [CV_all_1x_female, QRS_amp_1x_female, QRS_dur_1x_female, QT_int_1x_female, abs(ST_avg_1x_female), T_peakend_dur_1x_female, T_wave_amp_1x_female, theta_T_1x_female, Twave_dur_1x_female];
 % output_names = {'CV', 'QRSamp', 'QRSdur', 'QTint', 'STavg',...
 %     'Tpeakend dur', 'Tawave amp', 'theta Twave', 'Twave dur'};
 
-X_test = [QRS_dur_4x_male, QT_int_4x_male, T_peakend_dur_4x_male, T_wave_amp_4x_male];
-Y_test= [QRS_dur_4x_female, QT_int_4x_female, T_peakend_dur_4x_female, T_wave_amp_4x_female];
+X_test = [QRS_dur_1x_male, QT_int_1x_male, T_peakend_dur_1x_male, T_wave_amp_1x_male];
+Y_test= [QRS_dur_1x_female, QT_int_1x_female, T_peakend_dur_1x_female, T_wave_amp_1x_female];
 
 output_names = {'QRSdur', 'QTint', 'Tpeakend dur', 'Tawave amp'};
-test_count = length(QRS_dur_4x_male);
+test_count = length(QRS_dur_1x_male);
 
 addpath('../../build_regression_model/')
 load('regression_Blasso4.mat')
@@ -72,7 +72,7 @@ for i = 1:N_val
     predicted_outputs(i,:) = exp(y);
 end
 
-Y_pred_4x_lasso = predicted_outputs;
+Y_pred_1x_lasso = predicted_outputs;
 
 % with R^2 = 0.75, the model explains approximately 75% of the variability in the predicted variable
 R2ord = zeros(1,N_outputs_Y);

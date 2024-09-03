@@ -1,5 +1,6 @@
 clear; close all; clc
-addpath('/media/roshni/DATADRIVE01/Roshni/Cross-sex-Translator-RS/compute_ECG_features/')
+%addpath('/media/roshni/DATADRIVE01/Roshni/Cross-sex-Translator-RS/compute_ECG_features/')
+addpath('../compute_ECG_features/')
 color = [0 0 0]; % Black
 color_m = [0.968627451 0.305882353 0.839215686]; % Pink
 color_f = [0.333333333 0.62745098 0.984313725]; % Blue
@@ -303,10 +304,12 @@ for i = 1:N_val
     inputs = X_test(cell_index,:);
     x = log(inputs);
     xz = (x-mean(X_log))./std(X_log);
+    %xz = (x-mean(log(X_test)))./std(log(X_test));
 
     yz = xz*Blasso;
     %    yz = xz;
     y = yz.*std(Y_log)+mean(Y_log);
+    %y = yz.*std(log(Y_test))+mean(log(Y_test));
     predicted_outputs(i,:) = exp(y);
 end
 
