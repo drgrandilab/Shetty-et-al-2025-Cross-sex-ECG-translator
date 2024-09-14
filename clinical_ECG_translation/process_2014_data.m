@@ -41,18 +41,18 @@ ind_placebo = find(strcmp(Tfilter.EXTRT, 'Placebo'));
 
 % Uncomment the desired drug to process
 drug_data = Tfilter(ind_dofetilide,:);
-% drug_data = Tfilter(ind_quinidine,:);
-% drug_data = Tfilter(ind_ranolazine,:);
-% drug_data = Tfilter(ind_verapamil,:);
+%drug_data = Tfilter(ind_quinidine,:);
+%drug_data = Tfilter(ind_ranolazine,:);
+%drug_data = Tfilter(ind_verapamil,:);
 
 placebo_data = Tfilter(ind_placebo,:);
 
 female_id = 1001:1011;
 male_id = 1012:1022;
 
-rel_qtc_male = nan(11, 16); rel_qrs_male = nan(11, 16); rel_tpeakend_male = nan(11, 16); rel_twaveamp_male = nan(11, 16);
-male_master_qtc = nan(11, 16); male_master_qrs = nan(11, 16); male_master_tpeakend = nan(11, 16); male_master_twaveamp = nan(11, 16); male_master_drug_conc = nan(11,16);
-female_master_qtc = nan(11, 16); female_master_qrs = nan(11, 16); female_master_tpeakend = nan(11, 16); female_master_twaveamp = nan(11, 16); female_master_drug_conc = nan(11,16);
+rel_RR_male = nan(11, 16); rel_qtc_male = nan(11, 16); rel_qrs_male = nan(11, 16); rel_tpeakend_male = nan(11, 16); rel_twaveamp_male = nan(11, 16);
+male_master_RR = nan(11,16); male_master_qtc = nan(11, 16); male_master_qrs = nan(11, 16); male_master_tpeakend = nan(11, 16); male_master_twaveamp = nan(11, 16); male_master_drug_conc = nan(11,16);
+female_master_RR = nan(11,16); female_master_qtc = nan(11, 16); female_master_qrs = nan(11, 16); female_master_tpeakend = nan(11, 16); female_master_twaveamp = nan(11, 16); female_master_drug_conc = nan(11,16);
 translated_master_qtc = nan(11, 16); translated_master_qrs = nan(11, 16); translated_master_tpeakend = nan(11, 16); translated_master_twaveamp = nan(11, 16);
 
 
@@ -60,6 +60,7 @@ for i = 1:11
     % Male data
     male = male_id(i);
     m_ind = find(drug_data.RANDID== male);
+    male_id_RR = table2array(drug_data(m_ind, 12));
     male_id_qtc = table2array(drug_data(m_ind, 18));
     male_id_qrs = table2array(drug_data(m_ind, 15));
     male_id_tpeakend = table2array(drug_data(m_ind, 16));
@@ -67,22 +68,26 @@ for i = 1:11
     male_id_drug_conc = table2array(drug_data(m_ind, 10));
 
     m_ind_placebo = find(placebo_data.RANDID== male);
+    male_id_placebo_RR = table2array(placebo_data(m_ind_placebo, 12));
     male_id_placebo_qtc = table2array(placebo_data(m_ind_placebo, 18));
     male_id_placebo_qrs = table2array(placebo_data(m_ind_placebo, 15));
     male_id_placebo_tpeakend = table2array(placebo_data(m_ind_placebo, 16));
     male_id_placebo_twaveamp = table2array(placebo_data(m_ind_placebo, 17));
 
     %Placebo correction
+    rel_RR_male(i,:) = (( (male_id_RR - male_id_RR(1)) - (male_id_placebo_RR - male_id_placebo_RR(1)) )/male_id_RR(1) )*100  ;
     rel_qtc_male(i,:) = (( (male_id_qtc - male_id_qtc(1)) - (male_id_placebo_qtc - male_id_placebo_qtc(1)) )/male_id_qtc(1) )*100  ;
     rel_qrs_male(i,:) = (( (male_id_qrs - male_id_qrs(1)) - (male_id_placebo_qrs - male_id_placebo_qrs(1)) )/male_id_qrs(1) )*100  ;
     rel_tpeakend_male(i,:) = (( (male_id_tpeakend - male_id_tpeakend(1)) - (male_id_placebo_tpeakend - male_id_placebo_tpeakend(1)) )/male_id_tpeakend(1) )*100 ;
     rel_twaveamp_male(i,:) = (( (male_id_twaveamp - male_id_twaveamp(1)) - (male_id_placebo_twaveamp - male_id_placebo_twaveamp(1)) )/male_id_twaveamp(1) )*100  ;
 
+    RR_male_abs = (male_id_RR(1).*(1 + rel_RR_male(i,:)./100));
     qtc_male_abs = (male_id_qtc(1).*(1 + rel_qtc_male(i,:)./100));
     qrs_male_abs = (male_id_qrs(1).*(1 + rel_qrs_male(i,:)./100));
     tpeakend_male_abs = (male_id_tpeakend(1).*(1 + rel_tpeakend_male(i,:)./100));
     twaveamp_male_abs = (male_id_twaveamp(1).*(1 + rel_twaveamp_male(i,:)./100));
 
+    male_master_RR(i, :) = RR_male_abs;
     male_master_qtc(i, :) = qtc_male_abs;
     male_master_qrs(i, :) = qrs_male_abs;
     male_master_tpeakend(i, :) = tpeakend_male_abs;
@@ -125,6 +130,7 @@ for j = 1:11
     
     female = female_id(j);
     f_ind = find(drug_data.RANDID== female);
+    female_id_RR = table2array(drug_data(f_ind, 12));
     female_id_qtc = table2array(drug_data(f_ind, 18));
     female_id_qrs = table2array(drug_data(f_ind, 15));
     female_id_tpeakend = table2array(drug_data(f_ind, 16));
@@ -133,6 +139,7 @@ for j = 1:11
 
     
     f_ind_placebo = find(placebo_data.RANDID== female);
+    female_id_placebo_RR = table2array(placebo_data(f_ind_placebo, 12));
     female_id_placebo_qtc = table2array(placebo_data(f_ind_placebo, 18));
     female_id_placebo_qrs = table2array(placebo_data(f_ind_placebo, 15));
     female_id_placebo_tpeakend = table2array(placebo_data(f_ind_placebo, 16));
@@ -141,16 +148,19 @@ for j = 1:11
     if ~isempty(female_id_qtc)
 
     %Placebo correction
+    rel_RR_female = (( (female_id_RR - female_id_RR(1)) - (female_id_placebo_RR - female_id_placebo_RR(1)) )/female_id_RR(1) )*100  ;    
     rel_qtc_female = (( (female_id_qtc - female_id_qtc(1)) - (female_id_placebo_qtc - female_id_placebo_qtc(1)) )/female_id_qtc(1) )*100  ;
     rel_qrs_female = (( (female_id_qrs - female_id_qrs(1)) - (female_id_placebo_qrs - female_id_placebo_qrs(1)) )/female_id_qrs(1) )*100  ;
     rel_tpeakend_female = (( (female_id_tpeakend - female_id_tpeakend(1)) - (female_id_placebo_tpeakend - female_id_placebo_tpeakend(1)) )/female_id_tpeakend(1) )*100 ;
     rel_twaveamp_female = (( (female_id_twaveamp - female_id_twaveamp(1)) - (female_id_placebo_twaveamp - female_id_placebo_twaveamp(1)) )/female_id_twaveamp(1) )*100  ;
 
+    RR_female_abs = (female_id_RR(1).*(1 + rel_RR_female./100));
     qtc_female_abs = (female_id_qtc(1).*(1 + rel_qtc_female./100));
     qrs_female_abs = (female_id_qrs(1).*(1 + rel_qrs_female./100));
     tpeakend_female_abs = (female_id_tpeakend(1).*(1 + rel_tpeakend_female./100));
     twaveamp_female_abs = (female_id_twaveamp(1).*(1 + rel_twaveamp_female./100));
 
+    female_master_RR(j, :) = RR_female_abs;
     female_master_qtc(j, :) = qtc_female_abs;
     female_master_qrs(j, :) = qrs_female_abs;
     female_master_tpeakend(j, :) = tpeakend_female_abs;
@@ -270,6 +280,23 @@ figure(7); set(gcf, 'Units', 'Inches', 'Position', [0 0 4.5 4], 'PaperUnits', 'I
 % saveas(gcf,'fig_d1/quin_2014drug.svg')
 % saveas(gcf,'fig_d1/rano_2014drug.svg')
 % saveas(gcf,'fig_d1/vera_2014drug.svg')
+
+figure(8); hold on; set(gcf, 'color', 'w'); 
+[lineOut1, fillOut1] = stdshade(1000./female_master_RR,0.3,color_f_shade,time_point);
+[lineOut2, fillOut2] = stdshade(1000./male_master_RR,0.3,color_m_shade,time_point);
+hold on 
+plot(time_point, mean(1000./female_master_RR, 'omitnan'), '.-', 'Markersize', 12 ,'linewidth', 1.6, 'Color', color_f_solid)
+plot(time_point, mean(1000./male_master_RR, 'omitnan'), '.-','Markersize', 12,'linewidth', 1.6, 'Color', color_m_solid)
+xlim([-1 25]); 
+%set(gca, 'xticklabel', {[]});
+xticks([0,6,12,18,24 ]);  
+%xlabel('Time (h)'); ylabel('T-wave amp. (\muV)'); 
+set(findobj(gcf,'type','axes'), 'FontName','Arial','FontSize',16, 'LineWidth', 1.2, 'TickLength', [0.02, 0.02], 'box', 'off', 'tickdir', 'out');
+figure(8); set(gcf, 'Units', 'Inches', 'Position', [0 0 4.5 4], 'PaperUnits', 'Inches', 'PaperSize', [4.5, 4])
+% saveas(gcf,'fig_d1/dof_2014HR.svg')
+% saveas(gcf,'fig_d1/quin_2014HR.svg')
+% saveas(gcf,'fig_d1/rano_2014HR.svg')
+% saveas(gcf,'fig_d1/vera_2014HR.svg')
 
 %%
 errors_matrix = [diff_qrs_translated diff_qtc_translated diff_tpeakend_translated diff_twaveamp_translated];
