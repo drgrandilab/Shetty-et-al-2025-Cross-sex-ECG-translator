@@ -35,22 +35,20 @@ Cm = 1*1e-8;      % membrane capacitance, uF/um^2
 Aax = 2*pi*r*L; % patch surface area, um^2
 Ad = pi*r^2;    % disc surface area, um^2
 Atot = 2*Ad + Aax;  % total surface area, um^2
-Ctot = Cm*Atot; % total cell capacitance, uF
-
-p.Ctot = Atot*Cm;   % total cell capacitance, uF
+Rcg = 2;  % Acap 2x  Ageo (ORd 2011)
+Ctot = Atot*Cm*Rcg;
+p.Ctot = Ctot;   % total cell capacitance, uF
 
 Npatches = Ncell; % number of membrane patches
 p.N = Ncell;
 p.Npatches = Npatches;
 % mS, myoplasmic conductance, scalar
 
-
 % indexing for phi terms (in mV):
 % phi_m,i:               i = 1:N
 
 % indexing for I terms (in uA) and V terms (in mV): (for membrane patches)
 % V/I_m,i:            i = 1:N
-
 
 f_I = scaleI'*ones(1, Npatches); % scaling factors for ionic currents
 p.f_I = f_I;

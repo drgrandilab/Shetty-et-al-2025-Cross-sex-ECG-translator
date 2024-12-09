@@ -137,7 +137,7 @@ for ii = start_idx: stop_idx
 
 par_SA = ones(1,17); %ones(1,17);%all_parameters(ii,:);
 
-ggap_endo_male = 1700*10^(-6).*par_SA(17);   %mS
+ggap_endo_male = 3400*10^(-6).*par_SA(17);   %mS
 if gendertype ==1
     ggap = ones(Ncell-1,1);      % mS 350
     ggap(1: Ncell_endo-1) = ggap_endo_male;
@@ -159,13 +159,15 @@ pcable.GKr_female =  linspace(0.80*APfirst_gKr, 0.80*APlast_gKr, Ncell )';
 
 [ts, Vm, Gmat, cv_est, pout] =  cable_ORd11_gender(pcable, Ncell, ggap, bcl, scaleI, dtparams_cable, T, Vthresh, trange, gendertype, par_SA); % CV in cm/s
 
-parsave(Vm, cv_est, gendertype, bcl, ii)
+%parsave(Vm, cv_est, gendertype, bcl, ii)
 
 disp(ii)
+disp(cv_est)
 
 end
 ts_sample = ts(1:5:end,1);
-Tname = sprintf('ts_gen%d_Ncell%d_endo%d_epi%d_CL%d.mat', gendertype, Ncell, Ncell_endo, Ncell_epi, bcl); save(Tname, 'ts_sample');
+Tname = sprintf('ts_gen%d_Ncell%d_endo%d_epi%d_CL%d.mat', gendertype, Ncell, Ncell_endo, Ncell_epi, bcl); 
+%save(Tname, 'ts_sample');
 
 toc;
 
@@ -189,10 +191,10 @@ toc;
 
 %% plots
 % 
-% figure(1); hold on; set(gcf, 'color', 'w'); 
-% plot(ts, Vm, 'b', 'LineWidth', 1);
-% xlabel('Time'); ylabel('Voltage(mV)')
-% set(findobj(gcf,'type','axes'), 'FontName','Arial','FontSize',15, 'LineWidth', 1, 'box', 'off', 'tickdir', 'out');
+figure(1); hold on; set(gcf, 'color', 'w'); 
+plot(ts, Vm, 'b', 'LineWidth', 1);
+xlabel('Time'); ylabel('Voltage(mV)')
+set(findobj(gcf,'type','axes'), 'FontName','Arial','FontSize',15, 'LineWidth', 1, 'box', 'off', 'tickdir', 'out');
 
 % figure(2); hold on; set(gcf, 'color', 'w'); 
 % for n=1:Ncell

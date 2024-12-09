@@ -139,7 +139,7 @@ pcable.phii_0 = x0(1);
 
 par_SA = ones(1,17); %ones(1,17);%all_parameters(ii,:);
 
-ggap_endo_male = 1700*10^(-6).*par_SA(17);   %mS
+ggap_endo_male = 3400*10^(-6).*par_SA(17);   %mS
 if gendertype ==1
     ggap = ones(Ncell-1,1);      % mS 350
     ggap(1: Ncell_endo-1) = ggap_endo_male;

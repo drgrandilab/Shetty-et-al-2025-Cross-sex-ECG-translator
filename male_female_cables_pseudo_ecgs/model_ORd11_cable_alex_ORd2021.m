@@ -731,9 +731,9 @@ csqnmax=10.0;
 kmcsqn=0.8;
 
 Ivec = nan(Nm*3,1);    % ionic currents, uA
-Ivec(1:Nm) = p.Ctot*(INa+INaL+3*INaCa_i+3*INaK+INab + 3*INaCa_ss+ICaNa);      % Na+
-Ivec(Nm+1:2*Nm) = p.Ctot*(Ito+IKr+IKs+IK1+IKb-Istim-2*INaK + ICaK); % K+
-Ivec(2*Nm+1:3*Nm) = p.Ctot*(IpCa+ICab-2*INaCa_i + ICaL-2*INaCa_ss);      % Ca2+
+% Ivec(1:Nm) = p.Ctot*(INa+INaL+3*INaCa_i+3*INaK+INab + 3*INaCa_ss+ICaNa);      % Na+
+% Ivec(Nm+1:2*Nm) = p.Ctot*(Ito+IKr+IKs+IK1+IKb-Istim-2*INaK + ICaK); % K+
+% Ivec(2*Nm+1:3*Nm) = p.Ctot*(IpCa+ICab-2*INaCa_i + ICaL-2*INaCa_ss);      % Ca2+
 
 % all ionic currents
 [Ncurrents,~] = size(p.f_I);

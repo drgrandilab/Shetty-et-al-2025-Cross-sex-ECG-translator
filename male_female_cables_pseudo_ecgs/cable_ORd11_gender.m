@@ -26,11 +26,11 @@ end
 dt1 = dtparams.dt1; dt2 = dtparams.dt2; 
 dt1_samp = dtparams.dt1_samp; dt2_samp = dtparams.dt2_samp;
 twin = dtparams.twin;
-dt2_new = 0.06;
+dt2_new = dt2;
 
 %ts = get_time_vector(trange, dt1_samp, dt2_samp, twin, bcl);
 
-ts_save = get_time_vector(trange, 0.01, 0.06, twin, bcl);
+ts_save = get_time_vector(trange, 0.01, 0.02, twin, bcl);
 
 p.bcl = bcl;       % CL
 L = p.L; r = p.r;   % cell dimensions, um
@@ -39,9 +39,9 @@ Cm = 1*1e-8;      % membrane capacitance, uF/um^2
 Aax = 2*pi*r*L; % patch surface area, um^2
 Ad = pi*r^2;    % disc surface area, um^2
 Atot = 2*Ad + Aax;  % total surface area, um^2
-Ctot = Cm*Atot; % total cell capacitance, uF
-
-p.Ctot = Atot*Cm;   % total cell capacitance, uF
+Rcg = 2;  % Acap 2x  Ageo (ORd 2011)
+Ctot = Atot*Cm*Rcg;
+p.Ctot = Ctot;   % total cell capacitance, uF
 
 Npatches = Ncell; % number of membrane patches
 p.N = Ncell;

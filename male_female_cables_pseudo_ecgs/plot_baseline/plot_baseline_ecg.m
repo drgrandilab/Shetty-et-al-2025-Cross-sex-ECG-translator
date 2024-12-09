@@ -1,7 +1,7 @@
 addpath('../')
 
 % Uncomment to plot baseline male ecg
-gendertype = 1; num =1;
+gendertype = 2; num =1;
 load('ts_gen1_Ncell205_endo102_epi103_CL1000.mat')
 load('Vm_gen1_1_CL1000.mat')
 

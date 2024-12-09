@@ -1,4 +1,4 @@
-clear; clc; close all
+ clear; clc; close all
 addpath('../ecg_data_drug/')
 
 addpath('../../../male_female_cables_pseudo_ecgs/')

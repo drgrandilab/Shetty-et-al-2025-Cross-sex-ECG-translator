@@ -345,15 +345,15 @@ if plot_validation == 1
     for figdex = 1:N_figures
         figure(30)
         set(gcf,'color','w','Position',[50,100,1500,750])
-        for i = 1:9
+        for i = 1:4
             if dex1 <= N_outputs_Y
-                h = subplot(3,3,i); hold on
+                h = subplot(2,2,i); hold on
                 % Plot data points
                 factor = 1;
                 %if (output_index == 1) && (i == 6 || i == 7), factor = 1e6; end
                 %if (output_index == 2) && (i == 3 || i == 4), factor = 1e6; end
                 hold on; plot(nan, nan, '.','color', [1 1 1])
-                plot(factor*Y_test(:,dex1),factor*predicted_outputs(:,dex1),'Marker','o','LineStyle','none', 'Color', color_f)%,'Color',color)
+                plot(factor*Y_test(:,dex1),factor*predicted_outputs(:,dex1),'Marker','o','LineStyle','none', 'Color', [0.5 0.5 0.5])%,'Color',color)
                 %xlabel(['Actual ',output_names{dex1}])
                 %ylabel(['Predicted ',output_names{dex1}])
                 title(['R^2 = ',num2str(R2(dex1),4)])
@@ -373,8 +373,8 @@ if plot_validation == 1
             end
         end
     end
-    set(findobj(gcf,'type','axes'), 'FontName','Arial','FontSize',18, 'LineWidth', 1, 'box', 'off', 'tickdir', 'out');
-    figure(30); set(gcf, 'Units', 'Inches', 'Position', [0 0 12 10], 'PaperUnits', 'Inches', 'PaperSize', [12, 10])
+    set(findobj(gcf,'type','axes'), 'FontName','Arial','FontSize',20, 'LineWidth', 1, 'box', 'off', 'tickdir', 'out');
+    figure(30); set(gcf, 'Units', 'Inches', 'Position', [0 0 12 8], 'PaperUnits', 'Inches', 'PaperSize', [12, 8])
     %f = gcf; exportgraphics(f, 'validation.png', 'Resolution', 300)
 
     dex1 = 1;

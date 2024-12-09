@@ -40,10 +40,10 @@ ind_verapamil = find(strcmp(Tfilter.EXTRT, 'Verapamil HCL'));
 ind_placebo = find(strcmp(Tfilter.EXTRT, 'Placebo'));
 
 % Uncomment the desired drug to process
-drug_data = Tfilter(ind_dofetilide,:);
-%drug_data = Tfilter(ind_quinidine,:);
-%drug_data = Tfilter(ind_ranolazine,:);
-%drug_data = Tfilter(ind_verapamil,:);
+% drug_data = Tfilter(ind_dofetilide,:);
+drug_data = Tfilter(ind_quinidine,:);
+% drug_data = Tfilter(ind_ranolazine,:);
+% drug_data = Tfilter(ind_verapamil,:);
 
 placebo_data = Tfilter(ind_placebo,:);
 
