@@ -110,6 +110,7 @@ Blasso = nan(n_features, n_features); intercept = nan(n_features,1);
 for feature = 1:n_features
     [B_all, stats] = lasso(XZ, YZ(:,feature), 'CV', 10);
     %lassoPlot(B_all, stats, 'PlotType', 'CV');
+    
     B = B_all(:, stats.Index1SE);
     Blasso(:, feature) = B;
     intercept(feature, :) = stats.Intercept(stats.Index1SE);
